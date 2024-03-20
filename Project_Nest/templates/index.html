@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ship Servival Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image:url("https://d2a92m131axhse.cloudfront.net/cms/thumbnails/34/1080x350/images/blog/social/dangerous-cruise-lines.2401161450245.jpg");
+            background-size:cover;
+            background-repeat:no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh; 
+        }
+
+        img {
+            float: right;
+            border: 1px dotted rgb(9, 8, 8);
+            margin: 0px 0px 15px 20px;
+        }
+
+        header {
+            background-color:rgb(30, 32, 151);
+            color:rgb(169, 6, 88);
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav {
+            background-color:rgb(60, 19, 182);
+            overflow: hidden;
+        }
+
+        nav a {
+            float: left;
+            display: block;
+            color: black;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            background-color:seagreen;
+            color:rgb(219, 92, 92);
+        }
+
+        section {
+            padding: 20px;
+            display: none;
+        }
+
+        p {
+            line-height: 1.6;
+            color:black;
+        }
+
+        h2 {
+            line-height: 1;
+            color:rgb(170, 6, 6);
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color:black;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        input[type="checkbox"] {
+            margin-top: 5px;
+            margin-bottom: 15px;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color:yellowgreen;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color:goldenrod;
+            text-align: center;
+        }
+        .center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Set the height of the container to be the full viewport height */
+}
+
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Titanic Servival Prediction</h1>
+    </header>
+
+    <nav>
+        <a href="#" onclick="showSection('home')">Home</a>
+        <a href="#" onclick="showSection('details')">Details</a>
+    </nav>
+    
+
+    <section id="home">
+        <h2>Welcome to the Home Page</h2>
+        <p>Medical insurance is a crucial aspect of healthcare planning. <br>Understanding the factors that contribute to insurance costs can help individuals make informed decisions.<br>Explore the Details and Prediction pages to get person.</p>
+    
+    </section>
+    <section id="details">
+            <h2>Details Page</h2>
+            <form action="{{ url_for('predict') }}" method="post">
+                <label for="PassengerId">Passenger ID:</label>
+                <input type="number" id="PassengerId" name="PassengerId" required><br>
+        
+                <label for="Pclass">Passenger Class:</label>
+                <input type="number" id="Pclass" name="Pclass" required><br>
+        
+                <label for="Sex">Gender:</label>
+                <input type="number" id="Sex" name="Sex" required><br>
+        
+                <label for="SibSp">Siblings:</label>
+                <input type="number" id="SibSp" name="SibSp" required><br>
+        
+                <label for="Parch">Children:</label>
+                <input type="number" id="Parch" name="Parch" required><br>
+        
+                <label for="Fare">Fare:</label>
+                <input type="number" id="Fare" name="Fare" required><br>
+        
+                <label for="Embarked">Embarkation:</label>
+                <input type="number" id="Embarked" name="Embarked" required><br>
+        
+                <button type="submit" class="predict-button">Predict</button>  
+            </form>
+    </section>
+        
+
+    <section id="prediction">
+        <h2 text-align="center">Prediction Page</h2>
+        {% if prediction %}
+        <p>The predicted insurance charge is: ${{ prediction }}</p>
+        {% endif %}
+    </section>
+    
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('section').forEach(section => {
+                section.style.display = 'none';
+            });
+
+            // Show the selected section
+            document.getElementById(sectionId).style.display = 'block';
+
+            // If the selected section is 'prediction', simulate displaying results
+            if (sectionId === 'prediction') {
+                displayPredictionResults();
+            }
+            return false; // Prevent default form submission
+        }
+
+
+        
+    </script>
+</body>
+</html>
